@@ -45,7 +45,7 @@ class Track {
 	 */
 	addEvent(events, mapFunction) {
 		Utils.toArray(events).forEach((event, i) => {
-			if (event instanceof NoteEvent) {
+			if (event instanceof NoteEvent || event instanceof ControllerChangeEvent) {
 				// Handle map function if provided
 				if (typeof mapFunction === 'function') {
 					const properties = mapFunction(i, event);
@@ -130,14 +130,14 @@ class Track {
 		// Now this.explicitTickEvents is in correct order, and so is this.events naturally.
 		// For each explicit tick event, splice it into the main list of events and
 		// adjust the delta on the following events so they still play normally.
-		this.explicitTickEvents.forEach((noteEvent) => {
-			// Convert NoteEvent to it's respective NoteOn/NoteOff events
+		this.explicitTickEvents.forEach((explicitTickEvent) => {
+			// Convert a NoteEvent to its respective NoteOn/NoteOff events
 			// Note that as we splice in events the delta for the NoteOff ones will
 			// Need to change based on what comes before them after the splice.
-			noteEvent.buildData().events.forEach((e) => e.buildData(this));
+			explicitTickEvent.buildData().events.forEach((e) => e.buildData(this));
 
 			// Merge each event indivually into this track's event list.
-			noteEvent.events.forEach((event) => this.mergeSingleEvent(event));
+			explicitTickEvent.events.forEach((event) => this.mergeSingleEvent(event));
 		});
 
 		// Hacky way to rebuild track with newly spliced events.  Need better solution.
