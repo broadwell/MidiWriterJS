@@ -321,10 +321,11 @@ class Track {
 	 * Adds a controller change event
 	 * @param {number} number - Control number.
 	 * @param {number} value - Control value.
+	 * @param {number} tick - Tick value.
 	 * @return {Track}
 	 */
-	controllerChange(number, value) {
-		return this.addEvent(new ControllerChangeEvent({controllerNumber: number, controllerValue: value}));
+	controllerChange(number, value, tick) {
+		return this.addEvent(new ControllerChangeEvent({controllerNumber: number, controllerValue: value, startTick: tick}));
 	}
 
 }
