@@ -54,9 +54,9 @@ class Writer {
 	 * Output to stdout
 	 * @return {string}
 	 */
-    stdout() {
-		return process.stdout.write(new Buffer(this.buildFile()));
-    }
+    //stdout() {
+//		return process.stdout.write(new Buffer(this.buildFile()));
+    //}
 }
 
 export {Writer};
