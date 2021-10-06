@@ -105,7 +105,7 @@ class Track {
 
 		this.events.forEach((event, eventIndex) => {
 			// Build event & add to total tick duration
-			if (event instanceof NoteOnEvent || event instanceof NoteOffEvent) {
+			if (event instanceof NoteOnEvent || event instanceof NoteOffEvent || event instanceof ControllerChangeEvent) {
 				const built = event.buildData(this, precisionLoss);
 				precisionLoss = Utils.getPrecisionLoss(event.deltaWithPrecisionCorrection || 0);
 				this.data = this.data.concat(built.data);
