@@ -10,13 +10,14 @@ class ControllerChangeEvent {
 	constructor(fields) {
 		// Default fields values
 		fields = Object.assign({
+			wait: 0,
 			startTick: null,
 			delta: 0x00,
 		}, fields);
 
 		this.type = 'controller';
 		this.fields = fields;
-		this.startTick = fields.startTickk;
+		this.startTick = fields.startTick;
 		// delta time defaults to 0.
 		this.data = Utils.numberToVariableLength(fields.delta).concat(Constants.CONTROLLER_CHANGE_STATUS, fields.controllerNumber, fields.controllerValue);
 	}
@@ -39,7 +40,7 @@ class ControllerChangeEvent {
 			}
 
 		} else {
-			this.delta = Utils.getTickDuration(this.wait);
+			this.delta = Utils.getTickDuration(this.fields.wait);
 			this.tick = Utils.getRoundedIfClose(track.tickPointer + this.delta);
 		}
 

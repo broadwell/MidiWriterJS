@@ -134,10 +134,13 @@ class Track {
 			// Convert a NoteEvent to its respective NoteOn/NoteOff events
 			// Note that as we splice in events the delta for the NoteOff ones will
 			// Need to change based on what comes before them after the splice.
-			explicitTickEvent.buildData().events.forEach((e) => e.buildData(this));
-
-			// Merge each event indivually into this track's event list.
-			explicitTickEvent.events.forEach((event) => this.mergeSingleEvent(event));
+			if (explicitTickEvent instanceof NoteEvent) {
+				explicitTickEvent.buildData(this).events.forEach((e) => e.buildData(this));
+				// Merge each event indivually into this track's event list.
+				explicitTickEvent.events.forEach((event) => this.mergeSingleEvent(event));
+			} else {
+				this.mergeSingleEvent(explicitTickEvent);
+			}
 		});
 
 		// Hacky way to rebuild track with newly spliced events.  Need better solution.
