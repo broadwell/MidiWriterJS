@@ -46,7 +46,7 @@ class ControllerChangeEvent {
 
 		this.deltaWithPrecisionCorrection = Utils.getRoundedIfClose(this.delta - precisionDelta);
 
-		this.data = Utils.numberToVariableLength(0x00).concat(Constants.CONTROLLER_CHANGE_STATUS, this.fields.controllerNumber, this.fields.controllerValue);
+		this.data = Utils.numberToVariableLength(this.deltaWithPrecisionCorrection).concat(Constants.CONTROLLER_CHANGE_STATUS, this.fields.controllerNumber, this.fields.controllerValue);
 
 		return this;
 	}
