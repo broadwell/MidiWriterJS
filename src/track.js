@@ -103,7 +103,7 @@ class Track {
 
 		let precisionLoss = 0;
 
-		this.events.forEach((event, eventIndex) => {
+		this.events.forEach((event) => {
 			// Build event & add to total tick duration
 			if (event instanceof NoteOnEvent || event instanceof NoteOffEvent || event instanceof ControllerChangeEvent) {
 				const built = event.buildData(this, precisionLoss);
@@ -184,10 +184,10 @@ class Track {
 		this.events.splice(splicedEventIndex, 0, event);
 
 		// Now adjust delta of all following events
-		for (var i = splicedEventIndex + 1; i < this.events.length; i++) {
+		for (var j = splicedEventIndex + 1; j < this.events.length; j++) {
 			// Since each existing event should have a tick value at this point we just need to
 			// adjust delta to that the event still falls on the correct tick.
-			this.events[i].delta = this.events[i].tick - this.events[i - 1].tick;
+			this.events[j].delta = this.events[j].tick - this.events[j - 1].tick;
 		}
 	}
 
