@@ -54,9 +54,10 @@ class Writer {
 	 * Output to stdout
 	 * @return {string}
 	 */
-    stdout() {
-		return process.stdout.write(new Buffer(this.buildFile()));
-    }
+	// XXX Doesn't work with modern webapps
+    //stdout() {
+	//	return process.stdout.write(new Buffer(this.buildFile()));
+    //}
 }
 
 export {Writer};
