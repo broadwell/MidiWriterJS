@@ -13,7 +13,8 @@ class ControllerChangeEvent {
 			delta: 0x00,
 		}, fields);
 
-		this.type = 'controller';
+		this.type = 'controller-change';
+		this.fields = fields;
 		// delta time defaults to 0.
 		this.data = Utils.numberToVariableLength(fields.delta).concat(Constants.CONTROLLER_CHANGE_STATUS, fields.controllerNumber, fields.controllerValue);
 	}
