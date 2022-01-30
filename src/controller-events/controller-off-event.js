@@ -15,6 +15,8 @@ class ControllerOffEvent {
 
 		this.type 		= 'controller-off';
 		this.duration 	= fields.duration;
+		this.controllerNumber = fields.controllerNumber;
+		this.controllerValue = fields.controllerValue;
 
 		this.tick 		= fields.tick;
 		this.delta 		= Utils.getTickDuration(this.duration);
@@ -33,7 +35,7 @@ class ControllerOffEvent {
 
 		this.deltaWithPrecisionCorrection = Utils.getRoundedIfClose(this.delta - precisionDelta);
 
-		this.data = Utils.numberToVariableLength(this.deltaWithPrecisionCorrection).concat(Constants.CONTROLLER_CHANGE_STATUS, this.fields.controllerNumber, this.fields.controllerValue);
+		this.data = Utils.numberToVariableLength(this.deltaWithPrecisionCorrection).concat(Constants.CONTROLLER_CHANGE_STATUS, this.controllerNumber, this.controllerValue);
 
 		return this;
 	}

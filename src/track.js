@@ -48,7 +48,7 @@ class Track {
 	 */
 	addEvent(events, mapFunction) {
 		Utils.toArray(events).forEach((event, i) => {
-			if (event instanceof NoteEvent) {
+			if (event instanceof NoteEvent || event instanceof ControllerEvent) {
 				// Handle map function if provided
 				if (typeof mapFunction === 'function') {
 					const properties = mapFunction(i, event);
@@ -163,7 +163,7 @@ class Track {
 
 	/**
 	 * Merges a single event into this track's list of events based on event.tick property.
-	 * @param {NoteOnEvent|NoteOffEvent} - event
+	 * @param {NoteOnEvent|NoteOffEvent|ControllerOnEvent|ControllerOffEvent} - event
 	 * @return {Track}
 	 */
 	mergeSingleEvent(event) {

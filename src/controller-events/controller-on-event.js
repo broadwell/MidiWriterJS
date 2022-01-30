@@ -11,11 +11,16 @@ class ControllerOnEvent {
 		// Set default fields
 		fields = Object.assign({
 			startTick: null,
+			data: null,
+			wait: 0,
 		}, fields);
 
 		this.type 		= 'controller-on';
 		this.startTick 	= fields.startTick;
+		this.controllerNumber = fields.controllerNumber;
+		this.controllerValue = fields.controllerValue;
 
+		this.wait 		= fields.wait;
 		this.tick 		= null;
 		this.delta 		= null;
 		this.data 		= fields.data;
@@ -45,7 +50,7 @@ class ControllerOnEvent {
 
 		this.deltaWithPrecisionCorrection = Utils.getRoundedIfClose(this.delta - precisionDelta);
 
-		this.data = Utils.numberToVariableLength(this.deltaWithPrecisionCorrection).concat(Constants.CONTROLLER_CHANGE_STATUS, this.fields.controllerNumber, this.fields.controllerValue);
+		this.data = Utils.numberToVariableLength(this.deltaWithPrecisionCorrection).concat(Constants.CONTROLLER_CHANGE_STATUS, this.controllerNumber, this.controllerValue);
 
 		return this;
 	}
